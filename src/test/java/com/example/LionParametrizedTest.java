@@ -14,32 +14,23 @@ public class LionParametrizedTest {
     Lion lion;
     private final String sex;
     private final boolean hasMane;
-    private final String exeptionText;
 
-    public LionParametrizedTest(String sex, boolean hasMane, String exeptionText) {
+    public LionParametrizedTest(String sex, boolean hasMane) {
         this.sex = sex;
         this.hasMane = hasMane;
-        this.exeptionText = exeptionText;
     }
 
     @Parameterized.Parameters
     public static Object[][] getData() {
         return new Object[][] {
-                {"Самец", true, ""},
-                {"Самка", false, ""},
-                {"другое", false, "Используйте допустимые значения пола животного - самец или самка"}
+                {"Самец", true},
+                {"Самка", false},
         };
     }
 
     @Test
-    public void doesHaveManeTest() {
-        try {
-            lion = new Lion(sex, feline);
-            assertEquals(hasMane, lion.doesHaveMane());
-
-        } catch (Exception e) {
-            assertEquals(exeptionText, e.getMessage());
-        }
-
+    public void doesHaveManeTest() throws Exception {
+        lion = new Lion(sex, feline);
+        assertEquals(hasMane, lion.doesHaveMane());
     }
 }

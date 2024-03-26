@@ -28,4 +28,11 @@ public class LionTest {
         lion.getFood();
         Mockito.verify(feline, Mockito.times(1)).getFood("Хищник");
     }
+
+    @Test
+    public void getExceptionTest() {
+        String expectedExceptionText = "Используйте допустимые значения пола животного - самец или самка";
+        Exception exception = assertThrows(Exception.class, () -> new Lion("другое", feline));
+        assertEquals(expectedExceptionText, exception.getMessage());
+    }
 }
